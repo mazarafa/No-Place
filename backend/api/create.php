@@ -14,14 +14,12 @@ if(isset($authHeader['Authorzation']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
     $token = explore(" ", $token)[1];
 
     try{
+        
         $key = "YOU_SECRET_KEY";
         $decoded = JWT::decode($token, $key, array('HS256'));
-
-        //Do some actions if token decoded sucessfully!
-
-        // But for this demo let return decoded data
         http_response_code(200);
         echo json_encode($decoded);
+
     }catch(Exception $e){
         http_response_code(401);
         echo json_encode(array('message'=>'Plase authenticate'));
